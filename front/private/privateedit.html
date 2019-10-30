@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../blogstyle.css">
+</head>
+<body>
+     <header>
+        <div class="headerimages"><img src="../download.jpeg"></div>
+        <div class="headerimages"><img src="../logo_blog.jpg"></div>
+        <div class="headerimages"><img src="../images.png"></div>
+    </header>
+<div class="everything">
+    <form name="new-article" method="post">
+        <input id="postTitleInput" type="text" name="title">
+        <br>
+        <textarea form="new-article" id="article-body" style="width: 100%; height: 450px;"></textarea>
+        <br>
+        <input id="savepublicly" type="submit" value="POST" class="buttons">
+        <input id="save4l8r" type="submit" value="SAVE 4 L8R" class="buttons">
+    </form>
+</div>
+<script>
+let currentURL = window.location.href;
+let regex = /\?postID=(.*)/
+let neededVar = currentURL.match(regex); //null
+let commentsVar = '';
+let postID = '';
+if (neededVar != null) {
+    postID = currentURL.match(regex)[1];
+    } else { postID = null }            //postID = null
+
+let bodyInput = document.getElementById('article-body');
+let titleInput = document.getElementById('postTitleInput');
+if (postID != null) {                   //this fetch doesn't happen.
+    fetch('http://localhost:3000/posts/' + postID)
+    .then(res => res.json())
+    .then(data => { console.log(data); return data })
+    .then(function(data) {
+        titleInput.value = data.title;
+        bodyInput.innerHTML = data.body;
+        commentsVar = data.comments;
+    });
+}
+
+let SAVE4L8R = document.getElementById('save4l8r');
+let SAVEPUBLICLY = document.getElementById('savepublicly');
+//SAVING PRIVATELY===========================================================================
+SAVE4L8R.addEventListener('click', function(e) {
+    e.preventDefault();
+    let formData = new FormData();
+    if (postID != null) { formData.append('_id', postID); }
+    console.log("this is postID " + postID);        //should log null
+    formData.append('title', titleInput.value);
+    formData.append('body', bodyInput.value);    
+    formData.append('published', false);
+    let today = new Date();
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date+' '+time;    
+    formData.append('timestamp', dateTime);
+    formData.append('comments', JSON.stringify(commentsVar)); //appended all but id to payload
+    //EDITING AN EXISTING POST
+    if (postID != null ){
+        fetch('http://localhost:3000/posts/private', {
+            mode: 'cors',
+            method: 'put', 
+            body: formData
+        }).then(function(res) {
+            if (res.ok) {
+                window.location.href = './privatelist.html';
+            } else {
+                let error = new Error(res.statusText)
+                error.res = res
+                throw error
+            }
+        })
+    //IF YOU'RE CREATING A NEW POST
+    //   router.post('/posts/private', private_post_controller.posts_private_POST);
+    } else if (postID == null){                     //does it really === null?? yes
+        console.log('about to fetch the 10th route');
+        fetch('http://localhost:3000/posts/private', {
+            mode: 'cors',
+            method: 'post', 
+            body: formData
+        }).then(function(res) {
+            if (res.ok) {
+                window.location.href = './privatelist.html';
+            } else {
+                let error = new Error(res.statusText)
+                error.res = res
+                throw error
+            }
+        })
+    }
+});
+
+//SAVING AND POSTING PUBLICLY ON BLOG
+SAVEPUBLICLY.addEventListener('click', function(e) {
+    e.preventDefault();
+    let formData = new FormData();
+    if (postID != null) { formData.append('_id', postID); }
+    formData.append('title', titleInput.value);
+    formData.append('body', bodyInput.value);    
+    formData.append('published', true);
+    let today = new Date();
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date+' '+time;    
+    formData.append('timestamp', dateTime);
+    formData.append('comments', JSON.stringify(commentsVar)); 
+    //IF YOU'RE EDITING AN EXISTING POST
+    if (postID != null ){
+        fetch('http://localhost:3000/posts/private', {
+            mode: 'cors',
+            method: 'put', 
+            body: formData
+        }).then(function(res) {
+            if (res.ok) {
+                window.location.href = './privatelist.html';
+            } else {
+                let error = new Error(res.statusText)
+                error.res = res
+                throw error
+            }
+        })
+    //IF YOU'RE CREATING A NEW POST
+    } else if (postID === null){
+        fetch('http://localhost:3000/posts/private', {
+            mode: 'cors',
+            method: 'post', 
+            body: formData
+        }).then(function(res) {
+            if (res.ok) {
+                window.location.href = './privatelist.html';
+            } else {
+                let error = new Error(res.statusText)
+                error.res = res
+                throw error
+            }
+        })
+    }
+
+});
+</script>
+</body>
+</html>

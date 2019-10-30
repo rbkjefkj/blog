@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../blogstyle.css">
+</head>
+<body>
+   <header>
+        <div class="headerimages"><img src="../download.jpeg"></div>
+        <div class="headerimages"><img src="../logo_blog.jpg"></div>
+        <div class="headerimages"><img src="../images.png"></div>
+    </header>
+
+    <div class="everything">
+        <h1>ALL MY POSTS</h1>
+        <ul id="titleList">
+        </ul>
+    </div>
+</body>
+</html>
+
+<script>
+fetch('http://localhost:3000/posts/all')
+.then(res => res.json())
+.then(data => { return data }) //WO the return here, data is undefined!!!
+.then(function(data) {
+    let arr = Array.from(data);
+    for (let each of arr) {
+        let title = each.title;
+        let id = each["_id"];    
+        let li = document.createElement('li');
+        let a = document.createElement('a');
+        a.class = "oneOfTheTitles";
+        a.name = title;
+        a.innerHTML = title;
+        a.value = id;
+        a.addEventListener('click', function(){
+            let postID = a.value;
+            window.location.href = "./public.html?postID=" +  postID;
+        });
+        li.appendChild(a);   
+        //let textnode = document.createTextNode(title); WHY A TEXT NODE? WHAT IS THAT EXACTLY?
+        //li.appendChild(textnode);
+        document.getElementById("titleList").appendChild(li);
+    }   
+})
+//.catch HOW TO CORRECTLY CATCH?!
+</script>
+
+
+
+
+<!--
+    POST IDEAS
+HOW TO TALK TO HOT WOMEN
+WHAT TO DO IF YOUR CAT IS VERY WET
+-->

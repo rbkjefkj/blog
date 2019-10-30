@@ -1,0 +1,100 @@
+html {
+  min-height: 100%;
+}
+body {
+  min-height: 100%;
+}
+.everything {
+    display: flex;
+    width: 900px;
+    margin: auto;
+    flex-direction: column;
+    position: relative;
+}
+
+.comment {
+    background-color: cornsilk;
+    display: flex;
+    flex-direction: column;
+    width: 540px;
+    min-height: 200px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.authorNtimestamp {
+    height: 50px;
+    width: 540px;
+    background-color: white;
+}
+
+h4 {
+    margin:0;
+}
+
+h5 {
+    color: darkgrey;
+    margin: 5px;
+}
+
+.commentBody {
+    background-color: bisque;
+    height: 150px;
+    width: 540px;
+}
+
+h1 {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    letter-spacing: 5px;
+}
+
+p {
+    text-align: justify;
+}
+
+header {
+    height: 100px;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.headerimages {
+    height: 100px;
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+#leaveacomment {
+    height: 50px;
+    align-items: center;
+    width: 100%;
+    display: flex;
+}
+
+a { 
+    display: block;
+    align-self: center;
+    font-weight: bold;
+}
+
+.buttons {
+    background-color: white;
+    padding: 0 4px 0 4px;
+    height: 100%;
+    cursor: pointer !important;
+}
+
+/*.TESTER {
+    color: purple;
+    font-weight: bold;
+    font-size: 30px;
+}*/
+

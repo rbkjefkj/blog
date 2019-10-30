@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../blogstyle.css">
+    <style>
+        .row {
+            display: flex;
+            width: 100%;
+            height: 40px;
+        }
+        
+        #delete-form, #publish-form {
+            display: flex;
+            position: relative;
+            width: 10%:
+        }
+        
+        #delete-form {
+            margin: 0 0 0 auto;
+        }
+        #publish-form {
+            margin: 0 0 0 0;
+        }
+
+        #post-title {
+            padding-left: 10px;
+        }
+
+        #headline-container {
+            display: flex;
+            width: 100%;  
+        }
+
+        #newpost {
+            display: flex;
+            align-content: center;
+            margin: 0 0 0 auto;
+            /*display: inline-block;*/
+            white-space: nowrap;
+        }        
+
+        #forcentering {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+   <header>
+        <div class="headerimages"><img src="../download.jpeg"></div>
+        <div class="headerimages"><img src="../logo_blog.jpg"></div>
+        <div class="headerimages"><img src="../images.png"></div>
+    </header>
+
+    <div class="everything">
+        <div id="headline-container">
+            <div id="forcentering"><h1>ALL YOUR POSTS</h1></div>
+            <div id="newpost" style="cursor: pointer;"><a href="./privateedit.html">NEW POST</a></div>
+        </div>
+    
+        <div id="list-container">
+            <!--
+            <div class="row"> LIST ITEM EXAMPLE
+                <a id="post-title" style="font-weight: normal; cursor: pointer;">I don't feel so fresh, what should I do?</a>
+                <form id="delete-form">
+                    <input type="submit" class="list-buttons buttons" name="delete-btn" value="DELETE">
+                </form>
+                <form id="publish-form">
+                    <input type="submit" class="list-buttons buttons" name="publish-btn" value="publish/unpublish">
+                </form>
+            </div>-->
+        </div>
+    </div>
+<script>
+//LISTING ALL BLOGPOST TITLES FROM DATABASE ((UN)PUBLISH AND DELETION FUNCTIONS INCLUDED)
+fetch('http://localhost:3000/posts/private/all')
+.then(res => res.json())
+.then(data => { return data })
+.then(function(data) {
+    let arr = Array.from(data);
+    for (let each of arr) {
+        let title = each.title;
+        let id = each["_id"];
+        let published = each["published"];
+        
+        let oneRow = document.createElement('div');
+        oneRow.className = "row";
+        let a = document.createElement('a'); 
+        a.id = "post-title";
+        a.style="font-weight: normal, cursor: pointer;"; 
+        a.innerHTML = each.title;
+        a.addEventListener('click', function() {
+            if (published === true) {
+                window.location.href = "../public/public.html?postID=" + id;
+            } else {
+                window.location.href = "./privateedit.html?postID=" + id;
+            }    
+        });
+        oneRow.appendChild(a);
+        let deleteForm = document.createElement('form');
+        deleteForm.id = "delete-form";
+        let input1 = document.createElement('input');
+        input1.className = "list-buttons buttons";
+        input1.name = "delete-btn"; 
+        input1.value = "DELETE";
+        input1.type = "submit";
+        //DELETE
+        input1.addEventListener('click', function() { //I tried to define this function separately but then it executes right when page gets loaded :-s
+            let rUsure = confirm("Are you sure you wish to delete " + title + "?");
+            if (rUsure) {
+                fetch('http://localhost:3000/posts/private/' + id, { method: 'delete' })
+                .then(function(res) {
+                    if (res.ok) {
+                        location.reload();
+                    } else {//copypasted this handling from public.html COMMENTING fetch
+                        let error = new Error(res.statusText)
+                        error.res = res
+                        throw error
+                    }
+                });
+            }
+            else return;
+        });
+        deleteForm.appendChild(input1);
+        oneRow.appendChild(deleteForm);
+        let pubForm = document.createElement('form');
+        pubForm.id = "publish-form";
+        let input2 = document.createElement('input');
+        input2.type = "submit";
+        input2.className = "list-buttons buttons";
+        input2.name = "publish-btn";
+        if (each.published === true ) {
+            input2.value = "UNPUBLISH";
+            oneRow.style = "background-color: greenyellow";
+        } else {
+            input2.value = "PUBLISH";
+            oneRow.style = "background-color: orangered;"
+        }
+        //PUBLISH/UNPUBLISH
+        input2.addEventListener('click', function() {
+            let newBool = !published;
+            fetch('http://localhost:3000/posts/private/' + newBool + '/' + id, {
+                mode: 'cors',
+                method: 'put' 
+            })
+            .then(function(res) {
+                if (res.ok) {
+                    location(reload);
+                } else {
+                    let error = new Error(res.statusText)
+                    error.res = res
+                    throw error
+                    console.log('error happened');
+                }
+            });
+        });    
+        pubForm.appendChild(input2);
+        oneRow.appendChild(pubForm);
+        document.getElementById('list-container').appendChild(oneRow);
+    }
+})
+//SHOULD PERHAPS CATCH, EY?
+</script>
+</body>
+</html>

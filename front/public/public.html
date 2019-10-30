@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../blogstyle.css">
+</head>
+<body>
+    <header style="margin: 30px 0 30px 0;">
+        <div class="headerimages"><img src="../download.jpeg"></div>
+        <div class="headerimages"><img src="../logo_blog.jpg"></div>
+        <div class="headerimages"><img src="../images.png"></div>
+    </header>
+<div class="everything">
+    <div class="main-content">
+        <div id="headline-container" style="width: 100%; display: flex;">
+            <div id="for-centering" style="width: 100%;"><h1 id="postTitleGoesHere" align="center" style="margin: 0 0 0 0;">JeffreeStar</h1></div>
+            <div id="allposts" style="align-content: center; display: flex; margin: 0 0 0 auto; white-space: nowrap;"><a href="publiclist.html" class="pointer">ALL POSTS</a></div> 
+        </div>
+        <p id="postBodyGoesHere">
+            The pomegranate (Punica granatum) is a fruit-bearing deciduous shrub in the family Lythraceae, subfamily Punicoideae, that grows between 5 and 10 m (16 and 33 ft) tall.
+The fruit is typically in season in the Northern Hemisphere from September to February,[2] and in the Southern Hemisphere from March to May. As intact arils or juice, pomegranates are used in baking, cooking, juice blends, meal garnishes, smoothies, and alcoholic beverages, such as cocktails and wine.
+Young pomegranate in Side, Turkey
+The pomegranate originated in the region extending from modern-day Iran to northern India,[3] and has been cultivated since ancient times throughout the Mediterranean region. It was introduced into Spanish America in the late 16th century and into California by Spanish settlers in 1769.[3]
+Today, it is widely cultivated throughout the Middle East and Caucasus region, north and tropical Africa, South Asia, Central Asia, the drier parts of southeast Asia, and parts of the Mediterranean Basin.[3] It is also cultivated in parts of Arizona and California.[4] In the 20th and 21st centuries, it has become more common in the shops and markets of Europe and the Western Hemisphere.[3][4]
+        </p>
+    </div>
+
+    <div id="leaveacomment"><b><a onclick="showCommentBox()" style="cursor: pointer;">LEAVE A COMMENT</a></b></div>
+    <!--BOX THAT OPENS TO LET YOU TYPE A COMMENT-->
+    <div id="commentbox" style="border: none; background-color: black; width: 100%; display: none; justify-content: center; margin=0;">
+        <form id="editform" method="post" autocomplete="off"><!--action="/posts/:post_id" ????!!!-->
+            <fieldset>
+            <br>
+            <input id="nickname" type="text" required style="font-family: Georgia" value="I'd like to be called..."><br>
+            <br>
+            <textarea form="editform" id="comment" required="required" rows="10" cols="100" style="font-family: Georgia">I'd like to say...</textarea><br>
+            <input value="SUBMIT" type="submit" class="pointer">
+            </fieldset>
+        </form>
+    </div>
+    <!--COMMENTS-->
+    <div id="allCommentsContainer" style="width: 580px; display: flex; flex-direction: column; padding-top: 40px; padding-bottom: 40px; padding-left: 160px; padding-right: 160px;">
+        <!--COMMENT HTML EXAMPLE       
+        <div class="comment">
+            <div class="authorNtimestamp" style="height: 50px; width: 540px; background-color: white;">
+                    <h4 style="margin:0;">Priscilla Montgomery</h4>
+                    <h5 style="color: darkgrey; margin: 5px;">24.10.2019.</h5>
+            </div>
+            <div class="commentBody" style="background-color: bisque; height: 150px; width: 540px;">
+                <p>I like what you said in this blog post but I also disagree and I would like you to kill yourself and stop blogging you're wasting everybody's time.</p>
+            </div>
+        </div>-->
+    </div>
+</div>
+
+    <script>
+        //LOADING PAGE CONTENT
+        //FOR CORS SIMPLE REQUESTS: application/x-www-form-urlencoded, multipart/form-data, text/plain         
+        let currentPost = window.location.href;
+        let regex1 = /\?postID=(.*)/
+        let postID = currentPost.match(regex1)[1];
+        fetch('http://localhost:3000/posts/' + postID)
+        .then(res => res.json())
+        .then(data => { return data }) //wo the return, data is undefined!
+        .then(function(data) {
+            document.getElementById('postTitleGoesHere').innerHTML = data.title;
+            document.getElementById('postBodyGoesHere').innerHTML = data.body;
+            for (let comment of data.comments) {
+                let commentCard = document.createElement('div');
+                commentCard.className = 'comment';                
+                let upper = document.createElement('div');
+                let lower = document.createElement('div');
+                upper.className = 'authorNtimestamp';
+                lower.className = 'commentBody';
+                let h4 = document.createElement('h4');
+                let h5 = document.createElement('h5');
+                h4.innerHTML = comment.author;
+                h5.innerHTML = comment.timestamp;
+                upper.appendChild(h4);
+                upper.appendChild(h5);
+                let p = document.createElement('p');
+                p.innerHTML = comment.body;
+                lower.appendChild(p);
+                commentCard.appendChild(upper);
+                commentCard.appendChild(lower);
+                document.getElementById('allCommentsContainer').appendChild(commentCard);
+            }
+        });
+
+        //COMMENTING
+        const commentForm = document.getElementById("editform");
+        commentForm.addEventListener('submit', function(e) { //e stands for event object
+            e.preventDefault();
+            let formData = new FormData();
+            formData.append('author', document.getElementById('nickname').value);    
+            formData.append('body', document.getElementById('comment').value);
+            formData.append('postid', postID);
+
+            fetch('http://localhost:3000/posts/' + postID, {
+                mode: 'cors',
+                method: 'post',
+                //headers: { "Content-type": "multipart/form-data" //SO says to not set this at all? },
+                body: formData
+            }).then(function(response) {
+                if (response.ok) {
+//Note that these res.json() and res.text() functions are asynchronous, so you cannot log their return value directly. That’s why the console.log must be in a separate .then block.
+                    response = response.text(); //if this is changed to res.json() it breaks
+                    location.reload();
+                } else {
+                    let error = new Error(response.statusText)
+                    error.response = response
+                    throw error
+                }
+            })
+        });
+
+        //OPENING COMMENTING BOX
+        function showCommentBox() {
+            var x = document.getElementById("commentbox");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html> 
