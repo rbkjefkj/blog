@@ -38,7 +38,7 @@ router.put('/posts/private/:bool/:id', private_post_controller.posts_private_pos
 router.put('/posts/private', private_post_controller.posts_private_PUT);
 
 //10 Create a brand new post
-router.post('/posts/private', private_post_controller.posts_private_POST);
+router.post('/test/posts/private', private_post_controller.posts_private_POST);
 
 //LOGIN ROUTE
 router.post('/login', user_controller.login_POST);

@@ -44,7 +44,7 @@ if (postID != null) {                   //this fetch doesn't happen.
 
 let SAVE4L8R = document.getElementById('save4l8r');
 let SAVEPUBLICLY = document.getElementById('savepublicly');
-//SAVING PRIVATELY===========================================================================
+//SAVING PRIVATELY==============================================================================================================================
 SAVE4L8R.addEventListener('click', function(e) {
     e.preventDefault();
     let formData = new FormData();
@@ -77,8 +77,7 @@ SAVE4L8R.addEventListener('click', function(e) {
     //IF YOU'RE CREATING A NEW POST
     //   router.post('/posts/private', private_post_controller.posts_private_POST);
     } else if (postID == null){                     //does it really === null?? yes
-        console.log('about to fetch the 10th route');
-        fetch('http://localhost:3000/posts/private', {
+        fetch('http://localhost:3000/test/posts/private', {
             mode: 'cors',
             method: 'post', 
             body: formData
@@ -94,7 +93,7 @@ SAVE4L8R.addEventListener('click', function(e) {
     }
 });
 
-//SAVING AND POSTING PUBLICLY ON BLOG
+//SAVING AND POSTING PUBLICLY ON BLOG====================================================================================================================
 SAVEPUBLICLY.addEventListener('click', function(e) {
     e.preventDefault();
     let formData = new FormData();
@@ -125,7 +124,7 @@ SAVEPUBLICLY.addEventListener('click', function(e) {
         })
     //IF YOU'RE CREATING A NEW POST
     } else if (postID === null){
-        fetch('http://localhost:3000/posts/private', {
+        fetch('http://localhost:3000/test/posts/private', {
             mode: 'cors',
             method: 'post', 
             body: formData

@@ -39,19 +39,19 @@ exports.posts_private_PUT = function(req, res, next) {
 }
 //10 ALMOST DONE: CREATE A BRAND NEW POST USING POST VERB
 exports.posts_private_POST = function(req, res, next) {
-    console.log('reached 10th route'); //didnt  get logged
+    console.log('reached 10th route');
     let form = new formidable.IncomingForm();
     form.parse(req, function(err, fields, files) {
         if (err) { return next(err) }
         //Post.insertOne(fields) //DOUBLE CHECK IF THIS IS RIGHT
-        Post.insertOne({
+//A Mongoose model doesn't have an insertOne method. Use the create({new doc}) method instead!
+        Post.create({
             title: fields.title,
             body: fields.body,
             published: fields.published,
             timestamp: fields.timestamp,
             comments: []
-        })
-        .exec(function(err) {
+        }, function(err, doc) {
             if(err) { return next(err); }
             console.log('Created brand new post.');
             res.send('Created brand new post.');    
