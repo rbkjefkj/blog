@@ -19,6 +19,7 @@
         <input id="save4l8r" type="submit" value="SAVE 4 L8R" class="buttons">
     </form>
 </div>
+<a id='logoutA'>LOG OUT</a>
 <script>
 let currentURL = window.location.href;
 let regex = /\?postID=(.*)/
@@ -139,6 +140,11 @@ SAVEPUBLICLY.addEventListener('click', function(e) {
         })
     }
 
+});
+
+let logoutButton = document.getElementById('logoutA');
+logoutButton.addEventListener('click', function() {
+    fetch('http://localhost:3000/logout');
 });
 </script>
 </body>

@@ -2,13 +2,6 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 
-/*router.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', ['*']);
-    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.append('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-});*/
-
 const public_post_controller = require('../controllers/PostController');
 const private_post_controller = require('../controllers/PrivatePostController');
 const user_controller = require('../controllers/UserController');
@@ -41,7 +34,11 @@ router.put('/posts/private', private_post_controller.posts_private_PUT);
 router.post('/test/posts/private', private_post_controller.posts_private_POST);
 
 //LOGIN ROUTE
+router.get('/login', user_controller.login_GET);
 router.post('/login', user_controller.login_POST);
+
+//LOGOUT ROUTE
+router.get('/logout', user_controller.logout_GET);
 
 module.exports = router;
 

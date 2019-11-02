@@ -46,7 +46,7 @@
     </style>
 </head>
 <body>
-   <header>
+   <header style="background-color: wheat;">
         <div class="headerimages"><img src="../download.jpeg"></div>
         <div class="headerimages"><img src="../logo_blog.jpg"></div>
         <div class="headerimages"><img src="../images.png"></div>
@@ -57,7 +57,7 @@
             <div id="forcentering"><h1>ALL YOUR POSTS</h1></div>
             <div id="newpost" style="cursor: pointer;"><a href="./privateedit.html">NEW POST</a></div>
         </div>
-    
+        <a id="logoutA">LOG OUT</a>
         <div id="list-container">
             <!--
             <div class="row"> LIST ITEM EXAMPLE
@@ -160,6 +160,11 @@ fetch('http://localhost:3000/posts/private/all')
     }
 })
 //SHOULD PERHAPS CATCH, EY?
+
+let logoutButton = document.getElementById('logoutA');
+logoutButton.addEventListener('click', function() {
+    fetch('http://localhost:3000/logout');
+});
 </script>
 </body>
 </html>

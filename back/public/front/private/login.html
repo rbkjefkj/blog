@@ -5,11 +5,11 @@
 </head>
 <body>
     <div style="display: flex; width: 100%; justify-content: center; padding-top: 200px;">
-        <form method="post" autocomplete="off">
-            username:<br>
-            <input name="name" type="text" required><br>
-            password:<br>
-            <input name="desc" type="password" required><br>
+        <form method="post" autocomplete="off" action="/login">
+            <label for="username">username</label>
+            <input name="username" type="text" required><br>
+            <label for="password">password</label>
+            <input name="password" type="password" required><br>
             <input value="LOGIN" type="submit" class="buttons" style="height: 25px;">
         </form>
     </div>
