@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const cors = require('cors');
 const path = require('path');
@@ -9,8 +10,12 @@ const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const User = require('./models/user');
+const passportJWT = require("passport-jwt");
+const JWTStrategy = passportJWT.Strategy;
+const ExtractJWT = passportJWT.ExtractJwt;
+const jwt = require('jsonwebtoken');
 
-const mongoDb = process.env.DB_URL;
+const mongoDb = process.env.DB_URL; //'mongodb+srv://user:assword@cluster0-adjsh.mongodb.net/test?retryWrites=true&w=majority';
 
 mongoose.connect(mongoDb, { useUnifiedTopology: true });
 const db = mongoose.connection;
@@ -45,9 +50,10 @@ passport.use(
   });
 });
 
+
 //Static files are files that clients download as they are from the server. Express, by default does not allow you to serve static files. You need to enable it using the built-in middleware (1st line below). Now all static files you load will be considering 'public' as root. https://expressjs.com/en/starter/static-files.html
 app.use(express.static('public')); //Specify absolute path in express.static() by prepending __dirname. OK THAT DID NOT WORK.
-app.use(session({ secret: process.env.DB_SECRET, resave: false, saveUninitialized: true }));
+app.use(session({ secret: process.env.DB_SECRET/*'stingrays'*/, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));

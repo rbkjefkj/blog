@@ -6,10 +6,10 @@ const PostSchema = new Schema({
     body: { type: Schema.Types.Mixed, required: true }, //type: String instead?
     published: { type: Boolean, required: true },
     timestamp: { type: Date, default: Date.now() },
-    comments: { //NEED to make the comments such that upon creating a post there are none required but when a user types a comment both comment author and body are required.
+    comments: { type: Array,
         author: { type: String },
         body: { type: String },
-        timestamp: { type: Date, default: Date.now() }
+        timestamp: { type: String }
     }
 });
 

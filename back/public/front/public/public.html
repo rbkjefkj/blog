@@ -28,7 +28,7 @@ Today, it is widely cultivated throughout the Middle East and Caucasus region, n
     <div id="leaveacomment"><b><a onclick="showCommentBox()" style="cursor: pointer;">LEAVE A COMMENT</a></b></div>
     <!--BOX THAT OPENS TO LET YOU TYPE A COMMENT-->
     <div id="commentbox" style="border: none; background-color: black; width: 100%; display: none; justify-content: center; margin=0;">
-        <form id="editform" method="post" autocomplete="off"><!--action="/posts/:post_id" ????!!!-->
+        <form id="editform" method="post" autocomplete="off">
             <fieldset>
             <br>
             <input id="nickname" type="text" required style="font-family: Georgia" value="I'd like to be called..."><br>
@@ -65,7 +65,8 @@ Today, it is widely cultivated throughout the Middle East and Caucasus region, n
         .then(function(data) {
             document.getElementById('postTitleGoesHere').innerHTML = data.title;
             document.getElementById('postBodyGoesHere').innerHTML = data.body;
-            for (let comment of data.comments) {
+            let commentsArr = Array.from(data.comments);
+            for (let comment of commentsArr/*data.comments*/) {
                 let commentCard = document.createElement('div');
                 commentCard.className = 'comment';                
                 let upper = document.createElement('div');
@@ -95,6 +96,11 @@ Today, it is widely cultivated throughout the Middle East and Caucasus region, n
             formData.append('author', document.getElementById('nickname').value);    
             formData.append('body', document.getElementById('comment').value);
             formData.append('postid', postID);
+            let today = new Date();
+            let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            let dateTime = date+' '+time;    
+            formData.append('timestamp', dateTime);
 
             fetch('http://localhost:3000/posts/' + postID, {
                 mode: 'cors',

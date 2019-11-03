@@ -23,25 +23,28 @@
 <script>
 let currentURL = window.location.href;
 let regex = /\?postID=(.*)/
-let neededVar = currentURL.match(regex); //null
+let neededVar = currentURL.match(regex);
 let commentsVar = '';
 let postID = '';
 if (neededVar != null) {
     postID = currentURL.match(regex)[1];
-    } else { postID = null }            //postID = null
+    } else { postID = null }            
 
 let bodyInput = document.getElementById('article-body');
 let titleInput = document.getElementById('postTitleInput');
-if (postID != null) {                   //this fetch doesn't happen.
-    fetch('http://localhost:3000/posts/' + postID)
+//if (postID != null) {                   
+    fetch('http://localhost:3000/posts/private/' + postID)
     .then(res => res.json())
     .then(data => { console.log(data); return data })
     .then(function(data) {
+        if (data === "You are not allowed here") {
+            window.location.href = '../public/notallowed.html';
+        }
         titleInput.value = data.title;
         bodyInput.innerHTML = data.body;
         commentsVar = data.comments;
     });
-}
+//}
 
 let SAVE4L8R = document.getElementById('save4l8r');
 let SAVEPUBLICLY = document.getElementById('savepublicly');
@@ -50,7 +53,7 @@ SAVE4L8R.addEventListener('click', function(e) {
     e.preventDefault();
     let formData = new FormData();
     if (postID != null) { formData.append('_id', postID); }
-    console.log("this is postID " + postID);        //should log null
+    console.log("this is postID " + postID);       
     formData.append('title', titleInput.value);
     formData.append('body', bodyInput.value);    
     formData.append('published', false);
@@ -59,7 +62,7 @@ SAVE4L8R.addEventListener('click', function(e) {
     let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     let dateTime = date+' '+time;    
     formData.append('timestamp', dateTime);
-    formData.append('comments', JSON.stringify(commentsVar)); //appended all but id to payload
+    formData.append('comments', JSON.stringify(commentsVar));
     //EDITING AN EXISTING POST
     if (postID != null ){
         fetch('http://localhost:3000/posts/private', {
@@ -107,7 +110,7 @@ SAVEPUBLICLY.addEventListener('click', function(e) {
     let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     let dateTime = date+' '+time;    
     formData.append('timestamp', dateTime);
-    formData.append('comments', JSON.stringify(commentsVar)); 
+    //formData.append('comments', JSON.stringify(commentsVar)); 
     //IF YOU'RE EDITING AN EXISTING POST
     if (postID != null ){
         fetch('http://localhost:3000/posts/private', {
@@ -144,7 +147,12 @@ SAVEPUBLICLY.addEventListener('click', function(e) {
 
 let logoutButton = document.getElementById('logoutA');
 logoutButton.addEventListener('click', function() {
-    fetch('http://localhost:3000/logout');
+    fetch('http://localhost:3000/logout')
+    .then(function(res) {
+        if (res.ok) {
+            window.location.href = '/';
+        }
+    });
 });
 </script>
 </body>

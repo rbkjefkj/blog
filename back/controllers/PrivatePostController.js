@@ -43,14 +43,13 @@ exports.posts_private_POST = function(req, res, next) {
     let form = new formidable.IncomingForm();
     form.parse(req, function(err, fields, files) {
         if (err) { return next(err) }
-        //Post.insertOne(fields) //DOUBLE CHECK IF THIS IS RIGHT
-//A Mongoose model doesn't have an insertOne method. Use the create({new doc}) method instead!
+        //A Mongoose model doesn't have an insertOne method. Use the create({new doc}) method instead!
         Post.create({
             title: fields.title,
             body: fields.body,
             published: fields.published,
             timestamp: fields.timestamp,
-            comments: []
+            comments: new Array
         }, function(err, doc) {
             if(err) { return next(err); }
             console.log('Created brand new post.');
@@ -67,6 +66,19 @@ exports.posts_private_all_GET = function(req, res, next) {
         res.send(result);
     });
 }
+
+//12 Get post title and body for privateedit.html page
+exports.posts_private_postId_GET = function(req, res, next) {
+    if (req.params.id === null) { res.send(result); }
+    Post.findOne({ _id: req.params.id }, { title: 1, body: 1, comments: 1 })
+    .exec(function(err, result) {
+        if (err) { return next(err); }
+        res.send(result);
+    });
+}
+
+
+
 
 
 

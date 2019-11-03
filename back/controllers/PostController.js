@@ -29,7 +29,7 @@ exports.posts_postId_POST = function(req, res, next) {
             { $push: { comments: {
                         author: fields.author,
                         body: fields.body,
-                        timestamp: Date.now()
+                        timestamp: fields.timestamp
             }}}
         ).exec(function(err) {
         if (err) { return next(err); }

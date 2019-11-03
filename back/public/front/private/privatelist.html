@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script>
+        function showContent() {
+            document.getElementById("body").style.display = "block";
+        }
+    </script>
     <link href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../blogstyle.css">
     <style>
@@ -45,8 +50,8 @@
         }
     </style>
 </head>
-<body>
-   <header style="background-color: wheat;">
+<body id="body" onload="showContent()" style="display: none">
+   <header>
         <div class="headerimages"><img src="../download.jpeg"></div>
         <div class="headerimages"><img src="../logo_blog.jpg"></div>
         <div class="headerimages"><img src="../images.png"></div>
@@ -72,11 +77,16 @@
         </div>
     </div>
 <script>
+
+//https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_loader5 HOW TO ADD A LOADER
 //LISTING ALL BLOGPOST TITLES FROM DATABASE ((UN)PUBLISH AND DELETION FUNCTIONS INCLUDED)
 fetch('http://localhost:3000/posts/private/all')
 .then(res => res.json())
 .then(data => { return data })
 .then(function(data) {
+    if (data === "You are not allowed here") {
+        window.location.href = '../public/notallowed.html';
+    }
     let arr = Array.from(data);
     for (let each of arr) {
         let title = each.title;
@@ -163,7 +173,12 @@ fetch('http://localhost:3000/posts/private/all')
 
 let logoutButton = document.getElementById('logoutA');
 logoutButton.addEventListener('click', function() {
-    fetch('http://localhost:3000/logout');
+    fetch('http://localhost:3000/logout')
+    .then(function(res) {
+        if (res.ok) {
+            window.location.href = '/';
+        }
+    });
 });
 </script>
 </body>
