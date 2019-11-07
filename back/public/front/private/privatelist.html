@@ -7,6 +7,7 @@
         }
     </script>
     <link href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../blogstyle.css">
     <style>
         .row {
@@ -31,23 +32,6 @@
         #post-title {
             padding-left: 10px;
         }
-
-        #headline-container {
-            display: flex;
-            width: 100%;  
-        }
-
-        #newpost {
-            display: flex;
-            align-content: center;
-            margin: 0 0 0 auto;
-            /*display: inline-block;*/
-            white-space: nowrap;
-        }        
-
-        #forcentering {
-            width: 100%;
-        }
     </style>
 </head>
 <body id="body" onload="showContent()" style="display: none">
@@ -59,8 +43,8 @@
 
     <div class="everything">
         <div id="headline-container">
-            <div id="forcentering"><h1>ALL YOUR POSTS</h1></div>
-            <div id="newpost" style="cursor: pointer;"><a href="./privateedit.html">NEW POST</a></div>
+            <h1 id="blogpost-title">ALL YOUR POSTS</h1>
+            <a style="cursor: pointer" id="allposts" href="./privateedit.html">NEW POST</a>
         </div>
         <a id="logoutA">LOG OUT</a>
         <div id="list-container">

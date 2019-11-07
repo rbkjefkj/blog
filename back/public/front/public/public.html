@@ -2,6 +2,7 @@
 <html>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../blogstyle.css">
 </head>
 <body>
@@ -11,10 +12,9 @@
         <div class="headerimages"><img src="../images.png"></div>
     </header>
 <div class="everything">
-    <div class="main-content">
-        <div id="headline-container" style="width: 100%; display: flex;">
-            <div id="for-centering" style="width: 100%;"><h1 id="postTitleGoesHere" align="center" style="margin: 0 0 0 0;">JeffreeStar</h1></div>
-            <div id="allposts" style="align-content: center; display: flex; margin: 0 0 0 auto; white-space: nowrap;"><a href="publiclist.html" class="pointer">ALL POSTS</a></div> 
+        <div id="headline-container">
+            <h1 id="blogpost-title">CODE AS SPELLCASTING</h1>
+            <a id ="allposts" href="publiclist.html" class="pointer">ALL POSTS</a>
         </div>
         <p id="postBodyGoesHere">
             The pomegranate (Punica granatum) is a fruit-bearing deciduous shrub in the family Lythraceae, subfamily Punicoideae, that grows between 5 and 10 m (16 and 33 ft) tall.
@@ -23,19 +23,16 @@ Young pomegranate in Side, Turkey
 The pomegranate originated in the region extending from modern-day Iran to northern India,[3] and has been cultivated since ancient times throughout the Mediterranean region. It was introduced into Spanish America in the late 16th century and into California by Spanish settlers in 1769.[3]
 Today, it is widely cultivated throughout the Middle East and Caucasus region, north and tropical Africa, South Asia, Central Asia, the drier parts of southeast Asia, and parts of the Mediterranean Basin.[3] It is also cultivated in parts of Arizona and California.[4] In the 20th and 21st centuries, it has become more common in the shops and markets of Europe and the Western Hemisphere.[3][4]
         </p>
-    </div>
 
     <div id="leaveacomment"><b><a onclick="showCommentBox()" style="cursor: pointer;">LEAVE A COMMENT</a></b></div>
     <!--BOX THAT OPENS TO LET YOU TYPE A COMMENT-->
-    <div id="commentbox" style="border: none; background-color: black; width: 100%; display: none; justify-content: center; margin=0;">
+    <div id="commentbox" style="border: none; width: 60%; display: none; justify-content: center; margin=0;">
         <form id="editform" method="post" autocomplete="off">
-            <fieldset>
             <br>
             <input id="nickname" type="text" required style="font-family: Georgia" value="I'd like to be called..."><br>
             <br>
-            <textarea form="editform" id="comment" required="required" rows="10" cols="100" style="font-family: Georgia">I'd like to say...</textarea><br>
-            <input value="SUBMIT" type="submit" class="pointer">
-            </fieldset>
+            <textarea form="editform" id="comment" required="required" rows="10" cols="64" style="font-family: Georgia">I'd like to say...</textarea><br>
+            <input value="SUBMIT" type="submit" style="all: unset; background-color: darkOrange; color: white; cursor: pointer; border-radius: 5px; width: 20%; height: 30px; display: block; text-align: center; font-family: Arial; font-weight: 900;">
         </form>
     </div>
     <!--COMMENTS-->
@@ -63,7 +60,7 @@ Today, it is widely cultivated throughout the Middle East and Caucasus region, n
         .then(res => res.json())
         .then(data => { return data }) //wo the return, data is undefined!
         .then(function(data) {
-            document.getElementById('postTitleGoesHere').innerHTML = data.title;
+            document.getElementById('blogpost-title').innerHTML = data.title;
             document.getElementById('postBodyGoesHere').innerHTML = data.body;
             let commentsArr = Array.from(data.comments);
             for (let comment of commentsArr/*data.comments*/) {

@@ -4,7 +4,8 @@ const Post = require('../models/post');
 const express = require('express');
 const formidable = require('formidable');
 const mongoose = require('mongoose');
-
+const { check/*body???*/,validationResult } = require('express-validator');
+const { sanitizeFields } = require('express-validator');
 
 //1 DONE: get all post titles. Main page. Public.
 exports.posts_all_GET = function(req, res, next) {
@@ -22,8 +23,10 @@ exports.posts_all_GET = function(req, res, next) {
 
 exports.posts_postId_POST = function(req, res, next) {  
     let form = new formidable.IncomingForm();
-    form.parse(req, function (err, fields, files) {
+    form.parse(req, function (err, fields, files) {    
         if (err) { return next(err); }
+        //fields('author', 'Your name is too grandiose!').isLength({ max: 100 }), //https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/forms (VALIDATION&SANITIZATION)
+        //fields('body', 'Your comment should be published as a standalone essay...').isLength({ max: 3000 })
         Post.updateOne(    
             { _id: fields.postid },
             { $push: { comments: {

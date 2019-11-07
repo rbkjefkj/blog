@@ -47,7 +47,7 @@ h5 {
 }
 
 h1 {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Quicksand', sans-serif; /*'Oswald', sans-serif;*/
     text-align: center;
     letter-spacing: 5px;
 }
@@ -90,6 +90,21 @@ a {
     padding: 0 4px 0 4px;
     height: 100%;
     cursor: pointer !important;
+}
+
+#headline-container{
+    display: grid;
+}
+
+#blogpost-title {
+    justify-self: center;
+    margin-top: 0.7em;
+    margin-bottom: 0;
+}
+
+#allposts {
+    justify-self: end;
+    align-self: end;
 }
 
 /*.TESTER {
