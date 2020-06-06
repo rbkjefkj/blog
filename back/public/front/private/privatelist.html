@@ -60,7 +60,7 @@
 
 //https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_loader5 HOW TO ADD A LOADER
 //LISTING ALL BLOGPOST TITLES FROM DATABASE ((UN)PUBLISH AND DELETION FUNCTIONS INCLUDED)
-fetch('http://localhost:3000/posts/private/all')
+fetch('https://quiet-beyond-59149.herokuapp.com/posts/private/all' || 'http://localhost:3000/posts/private/all')
 .then(res => res.json())
 .then(data => { return data })
 .then(function(data) {
@@ -98,7 +98,7 @@ fetch('http://localhost:3000/posts/private/all')
         input1.addEventListener('click', function() { //I tried to define this function separately but then it executes right when page gets loaded :-s
             let rUsure = confirm("Are you sure you wish to delete " + title + "?");
             if (rUsure) {
-                fetch('http://localhost:3000/posts/private/' + id, { method: 'delete' })
+                fetch('https://quiet-beyond-59149.herokuapp.com/posts/private' + id, { method: 'delete' } || 'http://localhost:3000/posts/private/' + id, { method: 'delete' })
                 .then(function(res) {
                     if (res.ok) {
                         location.reload();
@@ -129,7 +129,12 @@ fetch('http://localhost:3000/posts/private/all')
         //PUBLISH/UNPUBLISH
         input2.addEventListener('click', function() {
             let newBool = !published;
-            fetch('http://localhost:3000/posts/private/' + newBool + '/' + id, {
+            fetch('https://quiet-beyond-59149.herokuapp.com/posts/private' + newBool + '/' + id, {
+				mode: 'cors',
+				method: 'put'
+			} ||
+
+			'http://localhost:3000/posts/private/' + newBool + '/' + id, {
                 mode: 'cors',
                 method: 'put'
             })
@@ -153,7 +158,7 @@ fetch('http://localhost:3000/posts/private/all')
 
 let logoutButton = document.getElementById('logout');
 logoutButton.addEventListener('click', function() {
-    fetch('http://localhost:3000/logout')
+    fetch('https://quiet-beyond-59149.herokuapp.com/logout' || 'http://localhost:3000/logout')
     .then(function(res) {
         if (res.ok) {
             window.location.href = '/';

@@ -42,7 +42,7 @@ Today, it is widely cultivated throughout the Middle East and Caucasus region, n
         let currentPost = window.location.href;
         let regex1 = /\?postID=(.*)/
         let postID = currentPost.match(regex1)[1];
-        fetch('http://localhost:3000/posts/' + postID)
+        fetch('https://quiet-beyond-59149.herokuapp.com/posts/' + postID || 'http://localhost:3000/posts/' + postID)
         .then(res => res.json())
         .then(data => { return data }) //wo the return, data is undefined!
         .then(function(data) {
@@ -91,7 +91,7 @@ Today, it is widely cultivated throughout the Middle East and Caucasus region, n
             let dateTime = date+' '+time;
             formData.append('timestamp', dateTime);
 
-            fetch('http://localhost:3000/posts/' + postID, {
+            fetch('https://quiet-beyond-59149.herokuapp.com/posts/' + postID || 'http://localhost:3000/posts/' + postID, {
                 mode: 'cors',
                 method: 'post',
                 //headers: { "Content-type": "multipart/form-data" //SO says to not set this at all? },

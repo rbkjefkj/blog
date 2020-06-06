@@ -21,7 +21,7 @@
 </html>
 
 <script>
-fetch('http://localhost:3000/posts/all')
+fetch('https://quiet-beyond-59149.herokuapp.com/posts/all' || 'http://localhost:3000/posts/all')
 .then(res => res.json())
 .then(data => { return data }) //WO the return here, data is undefined!!!
 .then(function(data) {

@@ -33,7 +33,7 @@ if (neededVar != null) {
 let bodyInput = document.getElementById('article-body');
 let titleInput = document.getElementById('postTitleInput');
 //if (postID != null) {
-    fetch('http://localhost:3000/posts/private/' + postID)
+    fetch('https://quiet-beyond-59149.herokuapp.com/posts/private' + postID || 'http://localhost:3000/posts/private/' + postID)
     .then(res => res.json())
     .then(data => { console.log(data); return data })
     .then(function(data) {
@@ -65,7 +65,7 @@ SAVE4L8R.addEventListener('click', function(e) {
     formData.append('comments', JSON.stringify(commentsVar));
     //EDITING AN EXISTING POST
     if (postID != null ){
-        fetch('http://localhost:3000/posts/private', {
+        fetch('https://quiet-beyond-59149.herokuapp.com/posts/private' || 'http://localhost:3000/posts/private', {
             mode: 'cors',
             method: 'put',
             body: formData
@@ -81,7 +81,7 @@ SAVE4L8R.addEventListener('click', function(e) {
     //IF YOU'RE CREATING A NEW POST
     //   router.post('/posts/private', private_post_controller.posts_private_POST);
     } else if (postID == null){                     //does it really === null?? yes
-        fetch('http://localhost:3000/test/posts/private', {
+        fetch('https://quiet-beyond-59149.herokuapp.com/posts/private' || 'http://localhost:3000/test/posts/private', {
             mode: 'cors',
             method: 'post',
             body: formData
@@ -113,7 +113,7 @@ SAVEPUBLICLY.addEventListener('click', function(e) {
     //formData.append('comments', JSON.stringify(commentsVar));
     //IF YOU'RE EDITING AN EXISTING POST
     if (postID != null ){
-        fetch('http://localhost:3000/posts/private', {
+        fetch('https://quiet-beyond-59149.herokuapp.com/posts/private' || 'http://localhost:3000/posts/private', {
             mode: 'cors',
             method: 'put',
             body: formData
@@ -128,7 +128,7 @@ SAVEPUBLICLY.addEventListener('click', function(e) {
         })
     //IF YOU'RE CREATING A NEW POST
     } else if (postID === null){
-        fetch('http://localhost:3000/test/posts/private', {
+        fetch('https://quiet-beyond-59149.herokuapp.com/posts/private' || 'http://localhost:3000/test/posts/private', {
             mode: 'cors',
             method: 'post',
             body: formData
@@ -147,7 +147,7 @@ SAVEPUBLICLY.addEventListener('click', function(e) {
 
 let logoutButton = document.getElementById('logoutA');
 logoutButton.addEventListener('click', function() {
-    fetch('http://localhost:3000/logout')
+    fetch('https://quiet-beyond-59149.herokuapp.com/logout' || 'http://localhost:3000/logout')
     .then(function(res) {
         if (res.ok) {
             window.location.href = '/';
