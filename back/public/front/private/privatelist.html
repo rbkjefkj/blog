@@ -98,7 +98,7 @@ fetch('https://quiet-beyond-59149.herokuapp.com/posts/private/all' || 'http://lo
         input1.addEventListener('click', function() { //I tried to define this function separately but then it executes right when page gets loaded :-s
             let rUsure = confirm("Are you sure you wish to delete " + title + "?");
             if (rUsure) {
-                fetch('https://quiet-beyond-59149.herokuapp.com/posts/private' + id, { method: 'delete' } || 'http://localhost:3000/posts/private/' + id, { method: 'delete' })
+                fetch('https://quiet-beyond-59149.herokuapp.com/posts/private/' + id, { method: 'delete' } || 'http://localhost:3000/posts/private/' + id, { method: 'delete' })
                 .then(function(res) {
                     if (res.ok) {
                         location.reload();
@@ -129,7 +129,7 @@ fetch('https://quiet-beyond-59149.herokuapp.com/posts/private/all' || 'http://lo
         //PUBLISH/UNPUBLISH
         input2.addEventListener('click', function() {
             let newBool = !published;
-            fetch('https://quiet-beyond-59149.herokuapp.com/posts/private' + newBool + '/' + id, {
+            fetch('https://quiet-beyond-59149.herokuapp.com/posts/private/' + newBool + '/' + id, {
 				mode: 'cors',
 				method: 'put'
 			} ||
