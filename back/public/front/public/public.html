@@ -1,9 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <link href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../blogstyle.css">
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<style>
+		@media(max-width: 460px) {
+			body #commentbox { width: 100% !important; }
+			form { width: 100%; }
+			textarea { width: 100%; }
+		}
+	</style>
 </head>
 <body>
     <header>
@@ -12,14 +21,14 @@
         <img src="../BLOG3.svg" id="blog3">
     </header>
 <div id="everything">
-            <h1 id="blogpost-title"><!--POMEGRANATE--></h1>
+            <h1 id="blogpost-title">POMEGRANATE</h1>
             <a id ="allposts" href="publiclist.html" class="pointer">ALL POSTS</a>
         <p id="postBodyGoesHere">
-            <!--The pomegranate (Punica granatum) is a fruit-bearing deciduous shrub in the family Lythraceae, subfamily Punicoideae, that grows between 5 and 10 m (16 and 33 ft) tall.
+            The pomegranate (Punica granatum) is a fruit-bearing deciduous shrub in the family Lythraceae, subfamily Punicoideae, that grows between 5 and 10 m (16 and 33 ft) tall.
 The fruit is typically in season in the Northern Hemisphere from September to February, and in the Southern Hemisphere from March to May. As intact arils or juice, pomegranates are used in baking, cooking, juice blends, meal garnishes, smoothies, and alcoholic beverages, such as cocktails and wine.
 Young pomegranate in Side, Turkey
 The pomegranate originated in the region extending from modern-day Iran to northern India, and has been cultivated since ancient times throughout the Mediterranean region. It was introduced into Spanish America in the late 16th century and into California by Spanish settlers in 1769.
-Today, it is widely cultivated throughout the Middle East and Caucasus region, north and tropical Africa, South Asia, Central Asia, the drier parts of southeast Asia, and parts of the Mediterranean Basin. It is also cultivated in parts of Arizona and California. In the 20th and 21st centuries, it has become more common in the shops and markets of Europe and the Western Hemisphere.-->
+Today, it is widely cultivated throughout the Middle East and Caucasus region, north and tropical Africa, South Asia, Central Asia, the drier parts of southeast Asia, and parts of the Mediterranean Basin. It is also cultivated in parts of Arizona and California. In the 20th and 21st centuries, it has become more common in the shops and markets of Europe and the Western Hemisphere.
         </p>
 
     <div id="leaveacomment"><b><a onclick="showCommentBox()" style="cursor: pointer;">LEAVE A COMMENT</a></b></div>
@@ -30,7 +39,7 @@ Today, it is widely cultivated throughout the Middle East and Caucasus region, n
             <input id="nickname" type="text" required style="font-family: Georgia" value="I'd like to be called..."><br>
             <br>
             <textarea form="editform" id="comment" required="required" rows="10" cols="64" style="font-family: Georgia">I'd like to say...</textarea><br>
-            <input value="SUBMIT" type="submit" style="all: unset; background-color: darkOrange; color: white; cursor: pointer; border-radius: 5px; width: 20%; height: 30px; display: block; text-align: center; font-family: Arial; font-weight: 900;">
+            <input value="SUBMIT" type="submit" style="all: unset; background-color: darkOrange; color: white; cursor: pointer; border-radius: 5px; height: 30px; margin-top: 5px; padding: 0 10px 0 10px; display: block; text-align: center; font-family: Arial; font-weight: 900;">
         </form>
     </div>
     <!--COMMENTS GO HERE-->

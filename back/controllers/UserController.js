@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const jwt = require("jsonwebtoken");
 
 exports.login_GET = function(req, res) {
-    res.redirect("/front/private/login.html");    
+    res.redirect("/front/private/login.html", { message: req.flash('error') });
+
 }
 
 //4
@@ -13,10 +14,11 @@ exports.login_GET = function(req, res) {
 //VANILLA PASSPORTJS
 exports.login_POST = passport.authenticate("local", {
         successRedirect: "/front/private/privatelist.html",
-        failureRedirect: "/front/private/login.html"
+        failureRedirect: "/front/private/login.html",
+		failureFlash: true
 });
 
 exports.logout_GET = function(req, res) {
     req.logout();
-    res.send('ok');          
+    res.send('ok');
 }

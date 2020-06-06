@@ -147,6 +147,7 @@ a {
 #logoutA {
 	position: absolute;
 	right: 0;
+	bottom: 0;
 	cursor: pointer;
 	padding-right: 10px;
 }
@@ -163,7 +164,7 @@ a {
 
 #forbidden-a {
 	text-align: center;
-	font-size: 500%;
+	font-size: 400%;
 	font-weight: bold;
 }
 
@@ -236,4 +237,22 @@ a {
     position: absolute;
     right: 0;
     font-family: Quicksand, sans-serif;
+}
+
+
+@media (max-width: 1000px) {
+	body #everything { width: 75%; }
+}
+
+@media (max-width: 800px) {
+	body #everything { width: 95%; max-width: none; }
+	#logoutA { padding-right: 0; }
+	header { margin: 10px 0 10px 0; }
+	.all-your-posts { margin-bottom: 35px; }
+	#postBodyGoesHere { margin-top: 0; }
+
+}
+
+@media (max-width: 600px) {
+	.all-your-posts { margin-bottom : 30px; }
 }

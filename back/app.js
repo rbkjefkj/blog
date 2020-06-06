@@ -14,6 +14,9 @@ const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 const jwt = require('jsonwebtoken');
+const flash = require('connect-flash');
+const cookieParser = require('cookie-parser');
+const EJS = require('ejs');
 
 const mongoDb = 'mongodb+srv://user:assword@cluster0-adjsh.mongodb.net/test?retryWrites=true&w=majority';//process.env.DB_URL; //'mongodb+srv://user:assword@cluster0-adjsh.mongodb.net/test?retryWrites=true&w=majority';
 
@@ -30,10 +33,10 @@ passport.use(
     User.findOne({ username: username }, (err, user) => {
       if (err) return done(err);
       if (!user) {
-        return done(null, false, { msg: "Incorrect username" });
+        return done(null, false, { message: "Incorrect username" });
       }
       if (user.password !== password) {
-        return done(null, false, { msg: "Incorrect password" });
+        return done(null, false, { message: "Incorrect password" });
       }
       return done(null, user);
     });
@@ -50,14 +53,16 @@ passport.use(
   });
 });
 
-
 //Static files are files that clients download as they are from the server. Express, by default does not allow you to serve static files. You need to enable it using the built-in middleware (1st line below). Now all static files you load will be considering 'public' as root. https://expressjs.com/en/starter/static-files.html
 app.use(express.static('public')); //Specify absolute path in express.static() by prepending __dirname. OK THAT DID NOT WORK.
-app.use(session({ secret: 'stingrays', resave: false, saveUninitialized: true }));
+app.use(session({ secret: 'stingrays', resave: false, saveUninitialized: true, cookie: { maxAge: 60000 } }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cookieParser());
+app.use(session({ cookie: { maxAge: 60000 }}));
+app.use(flash());
 app.use((req, res, next) => {
     res.append('Access-Control-Allow-Origin', ['*']);
     res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE, PATCH');
