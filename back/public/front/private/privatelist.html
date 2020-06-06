@@ -73,7 +73,7 @@ fetch('https://quiet-beyond-59149.herokuapp.com/posts/private/all' || 'http://lo
 .then(data => { return data })
 .then(function(data) {
     if (data === "You are not allowed here") {
-        //window.location.href = '../public/notallowed.html';
+        window.location.href = '../public/notallowed.html';
     }
     let arr = Array.from(data);
     for (let each of arr) {
