@@ -22,9 +22,7 @@ body {
 	width: 580px;
 	display: flex;
 	flex-direction: column;
-	padding: 40px 0 40px 0;
-	padding-left: 160px;
-	padding-right: 160px;
+	margin: 40px auto 40px auto;
 }
 
 .comment {
@@ -180,6 +178,7 @@ a {
 	font-size: large;
 	font-weight: bold;
 	text-transform: uppercase;
+	width: fit-content;
 }
 
 
