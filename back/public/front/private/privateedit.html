@@ -85,7 +85,7 @@ SAVE4L8R.addEventListener('click', function(e) {
     //IF YOU'RE CREATING A NEW POST
     //   router.post('/posts/private', private_post_controller.posts_private_POST);
     } else if (postID == null){                     //does it really === null?? yes
-        fetch('https://quiet-beyond-59149.herokuapp.com/posts/private', {
+        fetch('https://quiet-beyond-59149.herokuapp.com/test/posts/private', {
 			mode: 'cors',
 			method: 'post',
 			body: formData
@@ -140,7 +140,7 @@ SAVEPUBLICLY.addEventListener('click', function(e) {
         })
     //IF YOU'RE CREATING A NEW POST
     } else if (postID === null){
-        fetch('https://quiet-beyond-59149.herokuapp.com/posts/private', {
+        fetch('https://quiet-beyond-59149.herokuapp.com/test/posts/private', {
             mode: 'cors',
             method: 'post',
             body: formData
