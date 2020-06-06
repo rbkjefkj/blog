@@ -15,38 +15,34 @@
             width: 100%;
             height: 40px;
         }
-        
+
         #delete-form, #publish-form {
             display: flex;
             position: relative;
             width: 10%:
         }
-        
+
         #delete-form {
             margin: 0 0 0 auto;
         }
         #publish-form {
             margin: 0 0 0 0;
         }
-
-        #post-title {
-            padding-left: 10px;
-        }
     </style>
 </head>
 <body id="body" onload="showContent()" style="display: none">
-   <header>
-        <div class="headerimages"><img src="../download.jpeg"></div>
-        <div class="headerimages"><img src="../logo_blog.jpg"></div>
-        <div class="headerimages"><img src="../images.png"></div>
+	<header>
+ 	   <img src="../BLOG1.png" id="blog1">
+ 	   <img src="../BLOG2.svg" id="blog2">
+ 	   <img src="../BLOG3.svg" id="blog3">
     </header>
 
-    <div class="everything">
+    <div id="everything">
         <div id="headline-container">
-            <h1 id="blogpost-title">ALL YOUR POSTS</h1>
+            <h1 id="blogpost-title" class="all-your-posts">ALL YOUR POSTS</h1>
             <a style="cursor: pointer" id="allposts" href="./privateedit.html">NEW POST</a>
         </div>
-        <a id="logoutA">LOG OUT</a>
+        <a id="logout">LOG OUT</a>
         <div id="list-container">
             <!--
             <div class="row"> LIST ITEM EXAMPLE
@@ -76,26 +72,26 @@ fetch('http://localhost:3000/posts/private/all')
         let title = each.title;
         let id = each["_id"];
         let published = each["published"];
-        
+
         let oneRow = document.createElement('div');
         oneRow.className = "row";
-        let a = document.createElement('a'); 
+        let a = document.createElement('a');
         a.id = "post-title";
-        a.style="font-weight: normal, cursor: pointer;"; 
+        a.style="font-weight: normal, cursor: pointer;";
         a.innerHTML = each.title;
         a.addEventListener('click', function() {
             if (published === true) {
                 window.location.href = "../public/public.html?postID=" + id;
             } else {
                 window.location.href = "./privateedit.html?postID=" + id;
-            }    
+            }
         });
         oneRow.appendChild(a);
         let deleteForm = document.createElement('form');
         deleteForm.id = "delete-form";
         let input1 = document.createElement('input');
         input1.className = "list-buttons buttons";
-        input1.name = "delete-btn"; 
+        input1.name = "delete-btn";
         input1.value = "DELETE";
         input1.type = "submit";
         //DELETE
@@ -125,17 +121,17 @@ fetch('http://localhost:3000/posts/private/all')
         input2.name = "publish-btn";
         if (each.published === true ) {
             input2.value = "UNPUBLISH";
-            oneRow.style = "background-color: greenyellow";
+            oneRow.style = "background-color: greenyellow; border-bottom: 2px solid white;";
         } else {
             input2.value = "PUBLISH";
-            oneRow.style = "background-color: orangered;"
+            oneRow.style = "background-color: orangered; border-bottom: 2px solid white;"
         }
         //PUBLISH/UNPUBLISH
         input2.addEventListener('click', function() {
             let newBool = !published;
             fetch('http://localhost:3000/posts/private/' + newBool + '/' + id, {
                 mode: 'cors',
-                method: 'put' 
+                method: 'put'
             })
             .then(function(res) {
                 if (res.ok) {
@@ -147,7 +143,7 @@ fetch('http://localhost:3000/posts/private/all')
                     console.log('error happened');
                 }
             });
-        });    
+        });
         pubForm.appendChild(input2);
         oneRow.appendChild(pubForm);
         document.getElementById('list-container').appendChild(oneRow);
@@ -155,7 +151,7 @@ fetch('http://localhost:3000/posts/private/all')
 })
 //SHOULD PERHAPS CATCH, EY?
 
-let logoutButton = document.getElementById('logoutA');
+let logoutButton = document.getElementById('logout');
 logoutButton.addEventListener('click', function() {
     fetch('http://localhost:3000/logout')
     .then(function(res) {

@@ -2,24 +2,24 @@
 <html>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Oswald:700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../blogstyle.css">
 </head>
 <body>
-    <header style="margin: 30px 0 30px 0;">
+    <header>
         <img src="../BLOG1.png" id="blog1">
         <img src="../BLOG2.svg" id="blog2">
         <img src="../BLOG3.svg" id="blog3">
     </header>
-<div class="everything">
-            <h1 id="blogpost-title">POMEGRANATE</h1>
+<div id="everything">
+            <h1 id="blogpost-title"><!--POMEGRANATE--></h1>
             <a id ="allposts" href="publiclist.html" class="pointer">ALL POSTS</a>
         <p id="postBodyGoesHere">
-            The pomegranate (Punica granatum) is a fruit-bearing deciduous shrub in the family Lythraceae, subfamily Punicoideae, that grows between 5 and 10 m (16 and 33 ft) tall.
+            <!--The pomegranate (Punica granatum) is a fruit-bearing deciduous shrub in the family Lythraceae, subfamily Punicoideae, that grows between 5 and 10 m (16 and 33 ft) tall.
 The fruit is typically in season in the Northern Hemisphere from September to February, and in the Southern Hemisphere from March to May. As intact arils or juice, pomegranates are used in baking, cooking, juice blends, meal garnishes, smoothies, and alcoholic beverages, such as cocktails and wine.
 Young pomegranate in Side, Turkey
 The pomegranate originated in the region extending from modern-day Iran to northern India, and has been cultivated since ancient times throughout the Mediterranean region. It was introduced into Spanish America in the late 16th century and into California by Spanish settlers in 1769.
-Today, it is widely cultivated throughout the Middle East and Caucasus region, north and tropical Africa, South Asia, Central Asia, the drier parts of southeast Asia, and parts of the Mediterranean Basin. It is also cultivated in parts of Arizona and California. In the 20th and 21st centuries, it has become more common in the shops and markets of Europe and the Western Hemisphere.
+Today, it is widely cultivated throughout the Middle East and Caucasus region, north and tropical Africa, South Asia, Central Asia, the drier parts of southeast Asia, and parts of the Mediterranean Basin. It is also cultivated in parts of Arizona and California. In the 20th and 21st centuries, it has become more common in the shops and markets of Europe and the Western Hemisphere.-->
         </p>
 
     <div id="leaveacomment"><b><a onclick="showCommentBox()" style="cursor: pointer;">LEAVE A COMMENT</a></b></div>
@@ -33,24 +33,12 @@ Today, it is widely cultivated throughout the Middle East and Caucasus region, n
             <input value="SUBMIT" type="submit" style="all: unset; background-color: darkOrange; color: white; cursor: pointer; border-radius: 5px; width: 20%; height: 30px; display: block; text-align: center; font-family: Arial; font-weight: 900;">
         </form>
     </div>
-    <!--COMMENTS-->
-    <div id="allCommentsContainer" style="width: 580px; display: flex; flex-direction: column; padding-top: 40px; padding-bottom: 40px; padding-left: 160px; padding-right: 160px;">
-        <!--COMMENT HTML EXAMPLE       
-        <div class="comment">
-            <div class="authorNtimestamp" style="height: 50px; width: 540px; background-color: white;">
-                    <h4 style="margin:0;">Priscilla Montgomery</h4>
-                    <h5 style="color: darkgrey; margin: 5px;">24.10.2019.</h5>
-            </div>
-            <div class="commentBody" style="background-color: bisque; height: 150px; width: 540px;">
-                <p>I like what you said in this blog post but I also disagree and I would like you to kill yourself and stop blogging you're wasting everybody's time.</p>
-            </div>
-        </div>-->
-    </div>
+    <!--COMMENTS GO HERE-->
 </div>
 
     <script>
         //LOADING PAGE CONTENT
-        //FOR CORS SIMPLE REQUESTS: application/x-www-form-urlencoded, multipart/form-data, text/plain         
+        //FOR CORS SIMPLE REQUESTS: application/x-www-form-urlencoded, multipart/form-data, text/plain
         let currentPost = window.location.href;
         let regex1 = /\?postID=(.*)/
         let postID = currentPost.match(regex1)[1];
@@ -61,9 +49,15 @@ Today, it is widely cultivated throughout the Middle East and Caucasus region, n
             document.getElementById('blogpost-title').innerHTML = data.title;
             document.getElementById('postBodyGoesHere').innerHTML = data.body;
             let commentsArr = Array.from(data.comments);
+			if (commentsArr.length > 0) {
+				let a = document.createElement('div');
+				a.id = 'allCommentsContainer';
+				document.getElementById('everything').appendChild(a);
+			}
+
             for (let comment of commentsArr/*data.comments*/) {
                 let commentCard = document.createElement('div');
-                commentCard.className = 'comment';                
+                commentCard.className = 'comment';
                 let upper = document.createElement('div');
                 let lower = document.createElement('div');
                 upper.className = 'authorNtimestamp';
@@ -88,13 +82,13 @@ Today, it is widely cultivated throughout the Middle East and Caucasus region, n
         commentForm.addEventListener('submit', function(e) { //e stands for event object
             e.preventDefault();
             let formData = new FormData();
-            formData.append('author', document.getElementById('nickname').value);    
+            formData.append('author', document.getElementById('nickname').value);
             formData.append('body', document.getElementById('comment').value);
             formData.append('postid', postID);
             let today = new Date();
             let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
             let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            let dateTime = date+' '+time;    
+            let dateTime = date+' '+time;
             formData.append('timestamp', dateTime);
 
             fetch('http://localhost:3000/posts/' + postID, {
@@ -127,5 +121,5 @@ Today, it is widely cultivated throughout the Middle East and Caucasus region, n
     </script>
 </body>
 
-</html> 
+</html>
 <!-- http://luc.devroye.org/fonts-77153.html -->

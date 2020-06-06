@@ -9,46 +9,60 @@ html {
 body {
   min-height: 100%;
 }
-.everything {
+#everything {
     display: flex;
     width: 55%;
+	max-width: 790px;
     margin: auto;
     flex-direction: column;
     position: relative;
 }
 
+#allCommentsContainer {
+	width: 580px;
+	display: flex;
+	flex-direction: column;
+	padding: 40px 0 40px 0;
+	padding-left: 160px;
+	padding-right: 160px;
+}
+
 .comment {
-    background-color: cornsilk;
-    display: flex;
-    flex-direction: column;
-    width: 540px;
-    min-height: 200px;
-    margin-bottom: 10px;
-    padding-top: 10px;
-    padding-bottom: 15px;
-    padding-left: 20px;
-    padding-right: 20px;
+	display: flex;
+	flex-direction: column;
+	min-height: 200px;
+	border: 1px solid black;
+	margin-bottom: 10px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	padding-left: 12px;
+	padding-right: 12px;
 }
 
 .authorNtimestamp {
-    height: 50px;
-    width: 540px;
+	height: 50px;
+    border: solid black 1px;
+    border-bottom: white;
     background-color: white;
 }
 
+.commentBody {
+	min-height: 150px;
+	border: 1px solid black;
+	border-top: white;
+}
+
+.commentBody p { margin: 0 11px 11px 11px; }
+
 h4 {
-    margin:0;
+	margin: 7px 0 0 11px;
+	font-family: quicksand;
 }
 
 h5 {
+	font-weight: normal;
     color: darkgrey;
-    margin: 5px;
-}
-
-.commentBody {
-    background-color: bisque;
-    height: 150px;
-    width: 540px;
+    margin: 3px 0 0 11px;
 }
 
 h1 {
@@ -57,27 +71,29 @@ h1 {
     letter-spacing:2px;
 }
 
-p { text-align: justify; }
+p {
+	text-align: justify;
+	font-family: Quicksand, sans-serif;
+	font-weight: 300;
+}
 
-/*p::first-letter {
-    color: #903;
+#postBodyGoesHere::first-letter {
     float: left;
-    font-family: Georgia;
-    font-size: 75px;
-    line-height: 60px;
-    padding-top: 4px;
+    font-family: 'Dropcaps';
+	font-weight: 300;
+    font-size: 150px;
+    line-height: 130px;
     padding-right: 8px;
-    padding-left: 3px;
-    padding-bottom: 0;
-}*/
+}
 
+/*
 p:first-of-type::first-letter {
   font-family: 'Dropcaps';
   float: left;
   font-size: 7.125em;
   line-height: 0.65;
   margin: 0;
-  padding: 0.05em 0.1em 0 0;
+  padding: 0.05em 0.1em 10px 0;
 }
 
 @supports (initial-letter: 2) or (-webkit-initial-letter: 2) {
@@ -87,10 +103,9 @@ p:first-of-type::first-letter {
     float: none;
     font-size: inherit;
     line-height: inherit;
-    margin: 0;
-    padding: 0 0.25em 0 0;
+    padding: 0 0.25em 10px 0;
   }
-}
+}*/
 
 header {
     width: 100%;
@@ -100,6 +115,7 @@ header {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+	margin: 10px 0 30px 0;
 }
 
 header img { height: 100%; }
@@ -107,23 +123,99 @@ header img { height: 100%; }
 #blog2{ height: 94%; }
 
 #blog3 {
-    margin-left: 4px; 
+    margin-left: 4px;
     height: 96%;
 }
 
 #leaveacomment {
-    font-family: ''Times New Roman';
+    font-family: Quicksand, sans-serif;
     height: 50px;
     align-items: center;
     width: 100%;
     display: flex;
 }
 
-a { 
+#editform {
+	margin-bottom: 40px;
+}
+
+a {
     display: block;
     align-self: center;
     text-decoration: none;
 }
+
+/*private/privateedit.html ---------------------------------------------------*/
+#logoutA {
+	position: absolute;
+	right: 0;
+	cursor: pointer;
+	padding-right: 10px;
+}
+
+#privateEditBody { position: relative; }
+/*private/privatelist.html ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+/*public/notallowed.html -----------------------------------------------------*/
+#forbidden-h1 {
+	text-align: center;
+	font-size: x-large;
+}
+
+#forbidden-a {
+	text-align: center;
+	font-size: 500%;
+	font-weight: bold;
+}
+
+#forbidden-a:visited { color: red; }
+
+#forbidden-body { margin-top: 15%; }
+/*public/publiclist.html~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.titles {
+	list-style: none;
+	cursor: pointer;
+	font-family: Quicksand, sans-serif;
+	font-size: large;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+
+
+/*private/login.html~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#login-form {
+	display: flex;
+	flex-direction: column;
+}
+
+#login-form label{ font-size: smaller; }
+
+/*private/privatelist.html ---------------------------------------------------*/
+#logout {
+	position: absolute;
+	left: 0;
+	font-family: Quicksand;
+	cursor: pointer;
+}
+
+.all-your-posts { margin-bottom: 40px; }
+
+#post-title {
+	font-family: Quicksand;
+	font-weight: bold;
+	padding-left: 20px;
+	cursor: pointer;
+	text-transform: uppercase;
+}
+
+.list-buttons {
+	width: 80px;
+	font-size: x-small;
+}
+
+/*----------------------------------------------------------------------------*/
 
 .buttons {
     background-color: white;
@@ -138,11 +230,11 @@ a {
 
 #blogpost-title {
     justify-self: center;
+	text-transform: uppercase;
 }
 
 #allposts {
     position: absolute;
     right: 0;
-    font-family: 'Times New Roman';
+    font-family: Quicksand, sans-serif;
 }
-

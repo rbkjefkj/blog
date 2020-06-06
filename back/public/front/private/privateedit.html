@@ -3,13 +3,13 @@
 <head>
     <link rel="stylesheet" href="../blogstyle.css">
 </head>
-<body>
-     <header>
-        <div class="headerimages"><img src="../download.jpeg"></div>
-        <div class="headerimages"><img src="../logo_blog.jpg"></div>
-        <div class="headerimages"><img src="../images.png"></div>
-    </header>
-<div class="everything">
+<body id="PrivateEditBody">
+	<header>
+		<img src="../BLOG1.png" id="blog1">
+		<img src="../BLOG2.svg" id="blog2">
+		<img src="../BLOG3.svg" id="blog3">
+	</header>
+<div id="everything">
     <form name="new-article" method="post">
         <input id="postTitleInput" type="text" name="title">
         <br>
@@ -28,11 +28,11 @@ let commentsVar = '';
 let postID = '';
 if (neededVar != null) {
     postID = currentURL.match(regex)[1];
-    } else { postID = null }            
+    } else { postID = null }
 
 let bodyInput = document.getElementById('article-body');
 let titleInput = document.getElementById('postTitleInput');
-//if (postID != null) {                   
+//if (postID != null) {
     fetch('http://localhost:3000/posts/private/' + postID)
     .then(res => res.json())
     .then(data => { console.log(data); return data })
@@ -53,21 +53,21 @@ SAVE4L8R.addEventListener('click', function(e) {
     e.preventDefault();
     let formData = new FormData();
     if (postID != null) { formData.append('_id', postID); }
-    console.log("this is postID " + postID);       
+    console.log("this is postID " + postID);
     formData.append('title', titleInput.value);
-    formData.append('body', bodyInput.value);    
+    formData.append('body', bodyInput.value);
     formData.append('published', false);
     let today = new Date();
     let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    let dateTime = date+' '+time;    
+    let dateTime = date+' '+time;
     formData.append('timestamp', dateTime);
     formData.append('comments', JSON.stringify(commentsVar));
     //EDITING AN EXISTING POST
     if (postID != null ){
         fetch('http://localhost:3000/posts/private', {
             mode: 'cors',
-            method: 'put', 
+            method: 'put',
             body: formData
         }).then(function(res) {
             if (res.ok) {
@@ -83,7 +83,7 @@ SAVE4L8R.addEventListener('click', function(e) {
     } else if (postID == null){                     //does it really === null?? yes
         fetch('http://localhost:3000/test/posts/private', {
             mode: 'cors',
-            method: 'post', 
+            method: 'post',
             body: formData
         }).then(function(res) {
             if (res.ok) {
@@ -103,19 +103,19 @@ SAVEPUBLICLY.addEventListener('click', function(e) {
     let formData = new FormData();
     if (postID != null) { formData.append('_id', postID); }
     formData.append('title', titleInput.value);
-    formData.append('body', bodyInput.value);    
+    formData.append('body', bodyInput.value);
     formData.append('published', true);
     let today = new Date();
     let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    let dateTime = date+' '+time;    
+    let dateTime = date+' '+time;
     formData.append('timestamp', dateTime);
-    //formData.append('comments', JSON.stringify(commentsVar)); 
+    //formData.append('comments', JSON.stringify(commentsVar));
     //IF YOU'RE EDITING AN EXISTING POST
     if (postID != null ){
         fetch('http://localhost:3000/posts/private', {
             mode: 'cors',
-            method: 'put', 
+            method: 'put',
             body: formData
         }).then(function(res) {
             if (res.ok) {
@@ -130,7 +130,7 @@ SAVEPUBLICLY.addEventListener('click', function(e) {
     } else if (postID === null){
         fetch('http://localhost:3000/test/posts/private', {
             mode: 'cors',
-            method: 'post', 
+            method: 'post',
             body: formData
         }).then(function(res) {
             if (res.ok) {

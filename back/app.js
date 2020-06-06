@@ -15,7 +15,7 @@ const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 const jwt = require('jsonwebtoken');
 
-const mongoDb = process.env.DB_URL; //'mongodb+srv://user:assword@cluster0-adjsh.mongodb.net/test?retryWrites=true&w=majority';
+const mongoDb = 'mongodb+srv://user:assword@cluster0-adjsh.mongodb.net/test?retryWrites=true&w=majority';//process.env.DB_URL; //'mongodb+srv://user:assword@cluster0-adjsh.mongodb.net/test?retryWrites=true&w=majority';
 
 mongoose.connect(mongoDb, { useUnifiedTopology: true });
 const db = mongoose.connection;
