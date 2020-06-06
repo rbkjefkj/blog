@@ -53,7 +53,7 @@ passport.use(
 
 //Static files are files that clients download as they are from the server. Express, by default does not allow you to serve static files. You need to enable it using the built-in middleware (1st line below). Now all static files you load will be considering 'public' as root. https://expressjs.com/en/starter/static-files.html
 app.use(express.static('public')); //Specify absolute path in express.static() by prepending __dirname. OK THAT DID NOT WORK.
-app.use(session({ secret: process.env.DB_SECRET/*'stingrays'*/, resave: false, saveUninitialized: true }));
+app.use(session({ secret: 'stingrays', resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
