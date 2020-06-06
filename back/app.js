@@ -68,4 +68,4 @@ app.use((req, res, next) => {
 const allRoutes = require('./routes/allroutes');
 app.use('/', allRoutes);
 app.get("/", (req, res) => res.redirect("/front/public/publiclist.html"))
-app.listen(3000, () => console.log(`app listening on port 3000!`));
+app.listen(process.env.PORT || 3000, () => console.log(`app listening on some port!`));
