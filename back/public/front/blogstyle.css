@@ -148,7 +148,7 @@ a {
 	position: absolute;
 	right: 0;
 	bottom: 0;
-	cursor: pointer;
+	cursor: pointer !important;
 	padding-right: 10px;
 }
 
