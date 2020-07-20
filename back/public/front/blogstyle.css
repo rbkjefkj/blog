@@ -80,6 +80,8 @@ p {
     font-family: 'Dropcaps';
 	font-weight: 300;
     font-size: 150px;
+	margin: 0;
+	padding: 0;
     /*line-height: 130px;*/
     padding-right: 8px;
 }
