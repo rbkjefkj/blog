@@ -67,14 +67,12 @@ h1 {
     font-family: Quicksand, sans-serif;
     text-align: center;
     letter-spacing:2px;
-	border: 1px solid black;
 }
 
 p {
 	text-align: justify;
 	font-family: Quicksand, sans-serif;
 	font-weight: 300;
-	border: 1px solid black;
 }
 
 #postBodyGoesHere::first-letter {
@@ -82,7 +80,7 @@ p {
     font-family: 'Dropcaps';
 	font-weight: 300;
     font-size: 150px;
-	border: 1px solid black;
+	line-height: .7;
     padding-right: 8px;
 }
 
