@@ -80,7 +80,7 @@ p {
     font-family: 'Dropcaps';
 	font-weight: 300;
     font-size: 150px;
-	line-height: .5;
+	line-height: .6;
     padding-right: 8px;
 }
 
@@ -259,6 +259,6 @@ a {
 	#blog1 { width: 70%; }
 }
 
-@media (max-width: 400px) {
+/*@media (max-width: 400px) {
 	#postBodyGoesHere::first-letter { margin-top: .15em; }
-}
+}*/
