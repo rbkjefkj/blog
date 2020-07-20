@@ -80,7 +80,7 @@ p {
     font-family: 'Dropcaps';
 	font-weight: 300;
     font-size: 150px;
-    line-height: 130px;
+    /*line-height: 130px;*/
     padding-right: 8px;
 }
 
@@ -255,4 +255,6 @@ a {
 
 @media (max-width: 600px) {
 	.all-your-posts { margin-bottom : 30px; }
+	header img { width: inherit; }
+	#blog1 { width: 70%; }
 }
