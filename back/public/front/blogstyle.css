@@ -80,7 +80,7 @@ p {
     font-family: 'Dropcaps';
 	font-weight: 300;
     font-size: 150px;
-	line-height: .7;
+	/*line-height: .7;*/
     padding-right: 8px;
 }
 
