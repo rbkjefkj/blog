@@ -260,5 +260,5 @@ a {
 }
 
 @media (max-width: 400px) {
-	#postBodyGoesHere::first-letter { margin-top: .15em; }
+	#postBodyGoesHere::first-letter { margin-top: .2em; }
 }
