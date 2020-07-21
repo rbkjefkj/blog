@@ -261,5 +261,5 @@ a {
 
 @media (max-width: 400px) {
 	#postBodyGoesHere::first-letter { margin-top: .2em; }
-	#blogpost-title { margin: .5rem 0 1rem 0; }
+	#blogpost-title { margin: 2rem 0 3rem 0; }
 }
