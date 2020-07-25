@@ -1,0 +1,6 @@
+
+* {
+	box-sizing: border-box;
+	transition: .2s ease;
+	transition-property: color,background-color,opacity,visibility,transform;
+}
