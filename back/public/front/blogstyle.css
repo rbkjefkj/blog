@@ -255,7 +255,10 @@ a {
 
 @media (max-width: 600px) {
 	.all-your-posts { margin-bottom : 30px; }
-	header img { width: inherit; }
+	header img {
+		width: inherit;
+		height: inherit !important; /*wo this rule, header pics break on FF on mobile*/
+	}
 	#blog1 { width: 70%; }
 }
 
