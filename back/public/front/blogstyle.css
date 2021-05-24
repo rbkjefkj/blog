@@ -7,7 +7,8 @@ html {
   min-height: 100%;
 }
 body {
-  min-height: 100%;
+	font-size: 100%;
+  	min-height: 100%;
 }
 #everything {
     display: flex;
@@ -64,7 +65,7 @@ h5 {
 }
 
 h1 {
-    font-family: Quicksand, sans-serif;
+    font-family: 'Roboto Mono', monospace;
     text-align: center;
     letter-spacing:2px;
 }
@@ -80,7 +81,7 @@ p {
     font-family: 'Dropcaps';
 	font-weight: 300;
     font-size: 150px;
-	line-height: .6;
+	/*line-height: .6; this was messing with Chrome*/
     padding-right: 8px;
 }
 
@@ -126,7 +127,7 @@ header img { height: 100%; }
 }
 
 #leaveacomment {
-    font-family: Quicksand, sans-serif;
+    font-family: 'Roboto Mono', monospace;
     height: 50px;
     align-items: center;
     width: 100%;
@@ -175,7 +176,7 @@ a {
 .titles {
 	list-style: none;
 	cursor: pointer;
-	font-family: Quicksand, sans-serif;
+	font-family: 'Roboto Mono', monospace;
 	font-size: large;
 	font-weight: bold;
 	text-transform: uppercase;
