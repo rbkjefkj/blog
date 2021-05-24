@@ -43,9 +43,9 @@
     <div id="commentbox" style="border: none; width: 60%; display: none; justify-content: center; margin=0;">
         <form id="editform" method="post" autocomplete="off">
             <br>
-            <input id="nickname" type="text" required style="font-family: Georgia" value="I'd like to be called..."><br>
+            <input id="nickname" type="text" required style="font-family: Georgia" value="I'd like to be called..." onfocus="this.select();"><br>
             <br>
-            <textarea form="editform" id="comment" required="required" rows="10" cols="64" style="font-family: Georgia">I'd like to say...</textarea><br>
+            <textarea form="editform" id="comment" required="required" rows="10" cols="64" style="font-family: Georgia" onfocus="this.select();">I'd like to say...</textarea><br>
             <input value="SUBMIT" type="submit" style="all: unset; background-color: darkOrange; color: white; cursor: pointer; border-radius: 5px; height: 30px; margin-top: 5px; padding: 0 10px 0 10px; display: block; text-align: center; font-family: Arial; font-weight: 900;">
         </form>
     </div>
