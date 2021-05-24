@@ -39,7 +39,7 @@
         <p id="postBodyGoesHere">
         </p>
 
-    <div id="leaveacomment"><b><a onclick="showCommentBox()" style="cursor: pointer;">LEAVE A COMMENT</a></b></div>
+    <div id="leaveacomment"><b><a onclick="showCommentBox(); document.getElementById('editform').scrollIntoView();" style="cursor: pointer;">LEAVE A COMMENT</a></b></div>
     <!--BOX THAT OPENS TO LET YOU TYPE A COMMENT-->
     <div id="commentbox" style="border: none; width: 60%; display: none; justify-content: center; margin=0;">
         <form id="editform" method="post" autocomplete="off">
